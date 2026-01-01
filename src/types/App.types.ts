@@ -1,32 +1,23 @@
-import type {
-  LngLatBoundsLike,
-  PaddingOptions,
-  PointLike,
-  ViewState,
-} from 'react-map-gl/maplibre'
-
-export interface IInitialMap {
-  latitude: number
-  longitude: number
-  zoom: number
-  bearing: number
-  pitch: number
+export type CartoConfigType = {
+  apiBaseUrl: string
+  accessToken: string
+  connectionName: string
 }
 
-export type IViewState = Partial<ViewState> & {
-  bounds?: LngLatBoundsLike
-  fitBoundsOptions?: {
-    offset?: PointLike
-    minZoom?: number
-    maxZoom?: number
-    padding?: number | PaddingOptions
-  }
+export type SourceType = 'table' | 'tileset'
+
+export interface ILayerStyle {
+  pointRadiusMinPixels?: number
+  getFillColor?: number[]
+  getLineColor?: number[]
+  lineWidthMinPixels?: number
 }
 
-// export interface IViewState extends ViewState {
-//   latitude: number
-//   longitude: number
-//   zoom: number
-//   bearing: number
-//   pitch: number
-// }
+export interface ILayerConfig {
+  id: string
+  tableName: string
+  sourceType: SourceType
+  style: ILayerStyle
+  displayName?: string
+  description?: string
+}

@@ -1,72 +1,59 @@
 import DeckGL from 'deck.gl'
-import { VectorTileLayer } from '@deck.gl/carto'
-import { vectorTableSource, vectorTilesetSource } from '@carto/api-client'
 import { cartoConfig } from './cartoConfig/cartoConfig'
-import {
-  INITIAL_VIEW_STATE,
-  storesSource,
-  demographicsSource,
-} from './App.constants'
 import { useMemo, useState } from 'react'
 // import { type IInitialMap } from './types/App.types'
 import Map from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { BASEMAP } from '@deck.gl/carto'
-import type { IViewState } from './types/App.types'
 import { MapUISelector } from './UI/MapUISelector'
+import type { ILayerStyle } from './types/App.types'
+import { createLayers } from './utils/utils'
+import { LayerStyleEditor } from './UI/MapEditor'
+import { INITIAL_VIEW_STATE } from './constants/constants'
 
 function App(): React.ReactNode {
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE)
   const [layersVisibility, setLayersVisibility] = useState({
-    stores: true,
-    demographics: false,
+    stores: false,
+    demographics: true,
   })
+  const [customStyles, setCustomStyles] = useState<
+    Record<string, Partial<ILayerStyle>>
+  >({})
 
-  const dataStores = vectorTableSource({
-    ...cartoConfig,
-    tableName: storesSource,
-  })
+  console.log(layersVisibility, customStyles)
 
-  const dataDemoGraphics = vectorTilesetSource({
-    ...cartoConfig,
-    tableName: demographicsSource,
-  })
+  const layers = useMemo(
+    () => createLayers(layersVisibility, cartoConfig, customStyles),
+    [layersVisibility, customStyles]
+  )
 
-  const layers = useMemo(() => {
-    const result = []
-
-    if (layersVisibility.stores) {
-      result.push(
-        new VectorTileLayer({
-          id: 'stores-layer',
-          data: dataStores,
-          pointRadiusMinPixels: 3,
-          getFillColor: [200, 0, 80],
-        })
-      )
-    }
-
-    if (layersVisibility.demographics) {
-      result.push(
-        new VectorTileLayer({
-          id: 'demographics-layer',
-          data: dataDemoGraphics,
-          pointRadiusMinPixels: 2,
-          getLineColor: [0, 0, 0, 50],
-          getFillColor: [0, 120, 200, 10],
-          lineWidthMinPixels: 1,
-        })
-      )
-    }
-
-    return result
-  }, [layersVisibility])
-
-  const toggleLayer = layer => {
+  const toggleLayer = (layer: string) => {
     setLayersVisibility(prev => ({
       ...prev,
       [layer]: !prev[layer],
     }))
+  }
+
+  const updateLayerStyle = (
+    layerKey: string,
+    styleUpdates: Partial<ILayerStyle>
+  ) => {
+    setCustomStyles(prev => ({
+      ...prev,
+      [layerKey]: {
+        ...(prev[layerKey] || {}),
+        ...styleUpdates,
+      },
+    }))
+  }
+
+  const resetLayerStyle = (layerKey: string) => {
+    setCustomStyles(prev => {
+      const newStyles = { ...prev }
+      delete newStyles[layerKey]
+      return newStyles
+    })
   }
 
   return (
@@ -81,7 +68,7 @@ function App(): React.ReactNode {
         viewState={viewState}
         controller={true}
         layers={layers}
-        onViewStateChange={({ viewState }: { viewState: IViewState }) =>
+        onViewStateChange={({ viewState }: { viewState }) =>
           setViewState(viewState)
         }
         style={{ position: 'absolute', inset: '0' }}
@@ -90,6 +77,12 @@ function App(): React.ReactNode {
       <MapUISelector
         layersVisibility={layersVisibility}
         toggleLayer={toggleLayer}
+      />
+      <LayerStyleEditor
+        layersVisibility={layersVisibility}
+        customStyles={customStyles}
+        onStyleUpdate={updateLayerStyle}
+        onStyleReset={resetLayerStyle}
       />
     </div>
   )

@@ -1,0 +1,45 @@
+import { VectorTileLayer } from '@deck.gl/carto'
+import { LAYERS_CONFIG, SOURCE_LOADERS } from '../constants/constants'
+import type {
+  CartoConfigType,
+  ILayerConfig,
+  ILayerStyle,
+} from '../types/App.types'
+
+export const loadSource = (
+  config: ILayerConfig,
+  cartoConfig: CartoConfigType
+) => {
+  const loader = SOURCE_LOADERS[config.sourceType]
+
+  return loader({
+    ...cartoConfig,
+    tableName: config.tableName,
+  })
+}
+
+export const createLayers = (
+  layersVisibility: Record<string, boolean>,
+  cartoConfig: CartoConfigType,
+  customStyles?: Record<string, Partial<ILayerStyle>>
+) =>
+  Object.keys(layersVisibility)
+    .filter(key => layersVisibility[key])
+    .map(layerKey => {
+      const config = LAYERS_CONFIG[layerKey]
+
+      console.log(config, '->', layerKey)
+      console.log('customStyles', customStyles)
+      console.log(
+        'loadSource(config, cartoConfig)',
+        loadSource(config, cartoConfig)
+      )
+
+      return new VectorTileLayer({
+        id: config.id,
+        data: loadSource(config, cartoConfig),
+        ...config.style,
+        ...(customStyles?.[layerKey] ?? {}),
+      })
+    })
+    .filter(Boolean)
