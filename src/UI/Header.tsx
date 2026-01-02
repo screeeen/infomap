@@ -12,11 +12,10 @@ export const Header = ({
 }) => (
   <Box
     position="absolute"
-    top={90}
+    top={10}
     left={10}
     bgcolor="white"
-    borderRadius={2}
-    boxShadow="0 2px 8px rgba(0,0,0,0.15)"
+    borderBottom={0.2}
     zIndex={1000}
     minWidth={250}
   >

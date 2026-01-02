@@ -1,7 +1,6 @@
 import DeckGL from 'deck.gl'
 import { cartoConfig } from './cartoConfig/cartoConfig'
 import { useMemo, useState } from 'react'
-// import { type IInitialMap } from './types/App.types'
 import Map from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { BASEMAP } from '@deck.gl/carto'
@@ -14,8 +13,8 @@ import { Box } from '@mui/material'
 function App(): React.ReactNode {
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE)
   const [layersVisibility, setLayersVisibility] = useState({
-    stores: true,
-    demographics: false,
+    stores: false,
+    demographics: true,
   })
   const [customStyles, setCustomStyles] = useState<
     Record<string, Partial<ILayerStyle>>
