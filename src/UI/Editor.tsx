@@ -6,6 +6,7 @@ import { Fill } from './Fill'
 import { Radius } from './Radius'
 import { OutlineWidth } from './OutlineWidth'
 import { OutLineColor } from './OutLineColor'
+import { Revenue } from './Revenue'
 
 // interface Editor {
 //   layersVisibility: Record<string, boolean>
@@ -29,6 +30,7 @@ export const Editor = () => {
             <Radius />
             <OutlineWidth />
             <OutLineColor />
+            <Revenue />
           </Box>
         )}
       </Paper>

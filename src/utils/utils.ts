@@ -1,4 +1,4 @@
-import { VectorTileLayer } from '@deck.gl/carto'
+import { vectorTableSource, VectorTileLayer } from '@deck.gl/carto'
 import { LAYERS_CONFIG, SOURCE_LOADERS } from '../constants/constants'
 import type {
   CartoConfigType,
@@ -15,6 +15,7 @@ export const loadSource = (
   return loader({
     ...cartoConfig,
     tableName: config.tableName,
+    columns: ['revenue'],
   })
 }
 

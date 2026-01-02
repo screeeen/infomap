@@ -1,10 +1,26 @@
-import { vectorTableSource, vectorTilesetSource } from '@deck.gl/carto'
+import {
+  colorBins,
+  vectorTableSource,
+  vectorTilesetSource,
+} from '@deck.gl/carto'
 import type { ILayerConfig } from '../types/App.types'
 
 export const SOURCE_LOADERS = {
   table: vectorTableSource,
   tileset: vectorTilesetSource,
 }
+
+const MIN_REVENUE = 1000000
+const MAX_REVENUE = 2000000
+const STEPS = 10
+
+export const genDomain = () => {
+  return Array.from({ length: STEPS }, (_, i) =>
+    Math.round(MIN_REVENUE + (i * (MAX_REVENUE - MIN_REVENUE)) / (STEPS - 1))
+  )
+}
+
+const domain = genDomain()
 
 export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
   stores: {
@@ -13,7 +29,11 @@ export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
     sourceType: 'table',
     displayName: 'Tiendas',
     style: {
-      getFillColor: [200, 0, 80],
+      getFillColor: colorBins({
+        attr: 'revenue',
+        domain: domain,
+        colors: 'Earth',
+      }),
       lineWidthMinPixels: 1, // outline size
       getLineColor: [255, 0, 0, 255], // outline color
       pointRadiusMinPixels: 3, // radius

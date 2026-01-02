@@ -5,8 +5,8 @@ import { LayerContext } from './LayerContext'
 
 export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
   const [layersVisibility, setLayersVisibility] = useState({
-    stores: false,
-    demographics: true,
+    stores: true,
+    demographics: false,
   })
 
   const [customStyles, setCustomStyles] = useState<
