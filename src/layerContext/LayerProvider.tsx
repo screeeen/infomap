@@ -1,16 +1,7 @@
-import React, { createContext, useContext, useState } from 'react'
+import { useState } from 'react'
 import type { ILayerStyle } from '../types/App.types'
-import type { LayerContextType, LayerProviderProps } from './LayerContext.types'
-
-const LayerContext = createContext<LayerContextType | undefined>(undefined)
-
-export const useLayerContext = (): LayerContextType => {
-  const context = useContext(LayerContext)
-  if (!context) {
-    throw new Error('useLayerContext must be used within a LayerProvider')
-  }
-  return context
-}
+import type { LayerProviderProps } from './LayerContext.types'
+import { LayerContext } from './LayerContext'
 
 export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
   const [layersVisibility, setLayersVisibility] = useState({
@@ -22,7 +13,7 @@ export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
     Record<string, Partial<ILayerStyle>>
   >({})
 
-  const toggleLayer = (layer: string) => {
+  const toggleLayer = (layer: keyof typeof layersVisibility) => {
     setLayersVisibility(prev => ({
       ...prev,
       [layer]: !prev[layer],
@@ -50,10 +41,16 @@ export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
     })
   }
 
+  const selectedLayer =
+    (
+      Object.keys(layersVisibility) as Array<keyof typeof layersVisibility>
+    ).find(key => layersVisibility[key]) || 'stores'
+
   return (
     <LayerContext.Provider
       value={{
         layersVisibility,
+        selectedLayer,
         customStyles,
         toggleLayer,
         updateLayerStyle,

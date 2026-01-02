@@ -5,10 +5,10 @@ import Map from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { BASEMAP } from '@deck.gl/carto'
 import { createLayers } from './utils/utils'
-import { LayerStyleEditor } from './UI/MapEditor'
+import { Editor } from './UI/Editor'
 import { INITIAL_VIEW_STATE } from './constants/constants'
 import { Box } from '@mui/material'
-import { useLayerContext } from './context/LayerContext'
+import { useLayerContext } from './layerContext/useLayerContext'
 
 export const CartoMap = (): React.ReactNode => {
   const { layersVisibility, customStyles } = useLayerContext()
@@ -36,7 +36,7 @@ export const CartoMap = (): React.ReactNode => {
         }
         style={{ position: 'absolute', inset: '0' }}
       />
-      <LayerStyleEditor />
+      <Editor />
     </Box>
   )
 }

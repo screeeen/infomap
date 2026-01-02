@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { Header } from './Header'
 import { MapSelector } from './MapSelector'
 import { Box, Paper } from '@mui/material'
-import { ColorEditor } from './ColorEditor'
-import { RadiusEditor } from './RadiusEditor'
+import { Fill } from './Fill'
+import { Radius } from './Radius'
+import { OutlineWidth } from './OutlineWidth'
+import { OutLineColor } from './OutLineColor'
 
-// interface LayerStyleEditorProps {
+// interface Editor {
 //   layersVisibility: Record<string, boolean>
 //   customStyles: Record<string, Partial<ILayerStyle>>
 //   setCustomStyles: (customStyles: string) => void
@@ -14,7 +16,7 @@ import { RadiusEditor } from './RadiusEditor'
 //   toggleLayer: (layer: string) => void
 // }
 
-export const LayerStyleEditor = () => {
+export const Editor = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -23,8 +25,10 @@ export const LayerStyleEditor = () => {
         {isOpen && (
           <Box p={1}>
             <MapSelector />
-            <ColorEditor />
-            <RadiusEditor />
+            <Fill />
+            <Radius />
+            <OutlineWidth />
+            <OutLineColor />
           </Box>
         )}
       </Paper>

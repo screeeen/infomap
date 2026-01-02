@@ -3,6 +3,7 @@ import type { ILayerStyle } from '../types/App.types'
 
 export interface LayerContextType {
   layersVisibility: Record<string, boolean>
+  selectedLayer: string
   customStyles: Record<string, Partial<ILayerStyle>>
   toggleLayer: (layer: string) => void
   updateLayerStyle: (

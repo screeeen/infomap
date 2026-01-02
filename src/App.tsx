@@ -1,5 +1,5 @@
 import { CartoMap } from './CartoMap'
-import { LayerProvider } from './context/LayerContext'
+import { LayerProvider } from './layerContext/LayerProvider'
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import { theme } from '@carto/react-ui'
 

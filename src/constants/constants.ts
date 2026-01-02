@@ -14,7 +14,7 @@ export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
     displayName: 'Tiendas',
     style: {
       getFillColor: [200, 0, 80],
-      lineWidthMinPixels: 10, // outline size
+      lineWidthMinPixels: 1, // outline size
       getLineColor: [255, 0, 0, 255], // outline color
       pointRadiusMinPixels: 3, // radius
     },

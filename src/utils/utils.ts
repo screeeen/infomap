@@ -28,8 +28,6 @@ export const createLayers = (
     .map(layerKey => {
       const config = LAYERS_CONFIG[layerKey]
 
-      console.log('config', config)
-
       return new VectorTileLayer({
         id: config.id,
         data: loadSource(config, cartoConfig),

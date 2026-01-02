@@ -1,16 +1,12 @@
 import { Box, Slider } from '@mui/material'
 import { Typography } from '@carto/react-ui'
-import { useLayerContext } from '../context/LayerContext'
+import { useLayerContext } from '../layerContext/useLayerContext'
 import { LAYERS_CONFIG } from '../constants/constants'
 
-export const ColorEditor = () => {
-  const { layersVisibility, updateLayerStyle, customStyles } = useLayerContext()
+export const Fill = () => {
+  const { selectedLayer, updateLayerStyle, customStyles } = useLayerContext()
 
-  const selectedLayer = Object.keys(layersVisibility).find(
-    key => layersVisibility[key]
-  )
-
-  const layerConfig = LAYERS_CONFIG[selectedLayer as keyof ILayerConfig]
+  const layerConfig = LAYERS_CONFIG[selectedLayer]
 
   const handleColorChange = (
     layerKey: string,
@@ -29,7 +25,7 @@ export const ColorEditor = () => {
 
   return (
     <>
-      <Typography variant="body2">Color</Typography>
+      <Typography variant="body2">Fill</Typography>
 
       {['R', 'G', 'B'].map((label, index) => {
         const currentStyle = customStyles[selectedLayer] || {}
@@ -48,7 +44,6 @@ export const ColorEditor = () => {
                 onChange={(_, value) =>
                   handleColorChange(selectedLayer, index, value as number)
                 }
-                sx={{ flex: 1 }}
               />
               <Typography variant="body2">{currentColor[index]}</Typography>
             </Box>
