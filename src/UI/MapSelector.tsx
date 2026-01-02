@@ -1,13 +1,10 @@
 import { Typography } from '@carto/react-ui'
 import { Box } from '@mui/material'
+import { useLayerContext } from '../context/LayerContext'
 
-export const MapUISelector = ({
-  layersVisibility,
-  toggleLayer,
-}: {
-  layersVisibility: Record<string, boolean>
-  toggleLayer: (layer: string) => void
-}) => {
+export const MapSelector = () => {
+  const { layersVisibility, toggleLayer } = useLayerContext()
+
   const { stores, demographics } = layersVisibility
   return (
     <Box

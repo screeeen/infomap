@@ -2,19 +2,17 @@ import { LAYERS_CONFIG } from '../constants/constants'
 import { Typography } from '@carto/react-ui'
 import { Slider } from '@mui/material'
 import { Box } from '@mui/material'
-import type { ILayerStyle } from '../types/App.types'
+import { useLayerContext } from '../context/LayerContext'
 
-export const RadiusEditor = ({
-  selectedLayer,
-  onStyleUpdate,
-  customStyles,
-}: {
-  selectedLayer: string
-  onStyleUpdate: (layerKey: string, styleUpdates: Partial<ILayerStyle>) => void
-  customStyles: Record<string, Partial<ILayerStyle>>
-}) => {
+export const RadiusEditor = () => {
+  const { layersVisibility, customStyles, updateLayerStyle } = useLayerContext()
+
+  const selectedLayer = Object.keys(layersVisibility).find(
+    key => layersVisibility[key]
+  )
+
   const handleRadiusChange = (layerKey: string, value: number) => {
-    onStyleUpdate(layerKey, { pointRadiusMinPixels: value })
+    updateLayerStyle(layerKey, { pointRadiusMinPixels: value })
   }
 
   return (

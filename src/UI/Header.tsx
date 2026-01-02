@@ -19,7 +19,6 @@ export const Header = ({
     zIndex={1000}
     minWidth={250}
   >
-    {/* Header */}
     <Box
       onClick={() => setIsOpen(!isOpen)}
       p="12px 16px"

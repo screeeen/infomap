@@ -13,11 +13,6 @@ export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
     sourceType: 'table',
     displayName: 'Tiendas',
     style: {
-      // fill
-      // outline size and color
-      // radius
-      // fill color based  on column
-
       getFillColor: [200, 0, 80],
       lineWidthMinPixels: 10, // outline size
       getLineColor: [255, 0, 0, 255], // outline color
@@ -40,7 +35,7 @@ export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
 export const INITIAL_VIEW_STATE = {
   latitude: 39.8097343,
   longitude: -98.5556199,
-  zoom: 10,
+  zoom: 6,
   bearing: 0,
   pitch: 30,
 }
