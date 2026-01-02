@@ -19,6 +19,8 @@ export const CartoMap = (): React.ReactNode => {
     [layersVisibility, customStyles]
   )
 
+  console.log('layers', layers)
+
   return (
     <Box position="relative" width="100%" height="100%">
       <Map

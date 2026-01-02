@@ -1,3 +1,5 @@
+import type { Color } from '@deck.gl/core'
+
 export type CartoConfigType = {
   apiBaseUrl: string
   accessToken: string
@@ -8,8 +10,8 @@ export type SourceType = 'table' | 'tileset'
 
 export interface ILayerStyle {
   pointRadiusMinPixels?: number
-  getFillColor?: number[]
-  getLineColor?: number[]
+  getFillColor?: Color
+  getLineColor?: Color
   lineWidthMinPixels?: number
 }
 
