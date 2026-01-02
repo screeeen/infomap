@@ -11,7 +11,7 @@ export const RadiusEditor = ({
 }: {
   selectedLayer: string
   onStyleUpdate: (layerKey: string, styleUpdates: Partial<ILayerStyle>) => void
-  customStyles: Partial<ILayerStyle>
+  customStyles: Record<string, Partial<ILayerStyle>>
 }) => {
   const handleRadiusChange = (layerKey: string, value: number) => {
     onStyleUpdate(layerKey, { pointRadiusMinPixels: value })

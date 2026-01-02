@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { ILayerStyle } from '../types/App.types'
 import { Header } from './Header'
 import { MapUISelector } from './MapUISelector'
-import { Box, Paper } from '@mui/material'
+import { Paper } from '@mui/material'
 import { MapStyleEditor } from './MapStyleEditor'
 
 interface LayerStyleEditorProps {
@@ -23,14 +23,6 @@ export const LayerStyleEditor = ({
   onStyleReset,
 }: LayerStyleEditorProps) => {
   const [isOpen, setIsOpen] = useState(false)
-
-  // const visibleLayers = Object.keys(layersVisibility).filter(
-  //   key => layersVisibility[key]
-  // )
-
-  // if (visibleLayers.length === 0) return null
-
-  console.log('layersVisibility ', layersVisibility)
 
   return (
     <Header isOpen={isOpen} setIsOpen={setIsOpen}>

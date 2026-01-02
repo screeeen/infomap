@@ -13,8 +13,14 @@ export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
     sourceType: 'table',
     displayName: 'Tiendas',
     style: {
+      // fill
+      // outline size and color
+      // radius
+      // fill color based  on column
+
       pointRadiusMinPixels: 3,
       getFillColor: [200, 0, 80],
+      getLineColor: [0, 0, 0, 50],
     },
   },
   demographics: {

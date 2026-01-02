@@ -57,13 +57,7 @@ function App(): React.ReactNode {
   }
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-      }}
-    >
+    <Box position="relative" width="100%" height="100%">
       <Map
         mapStyle={BASEMAP.VOYAGER}
         viewState={viewState}
@@ -79,7 +73,6 @@ function App(): React.ReactNode {
         }
         style={{ position: 'absolute', inset: '0' }}
       />
-      {/* ----------- CONTROLS -------------- */}
       <LayerStyleEditor
         layersVisibility={layersVisibility}
         customStyles={customStyles}
