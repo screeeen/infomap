@@ -1,39 +1,38 @@
+import { Typography } from '@carto/react-ui'
+import { Box } from '@mui/material'
+
 export const MapUISelector = ({
   layersVisibility,
   toggleLayer,
 }: {
-  layersVisibility: { stores: boolean; demographics: boolean }
+  layersVisibility: Record<string, boolean>
   toggleLayer: (layer: string) => void
 }) => {
   const { stores, demographics } = layersVisibility
   return (
-    <div
-      style={{
-        position: 'absolute',
-        top: 10,
-        left: 10,
-        background: 'rgba(255,255,255,0.9)',
-        padding: 10,
-        borderRadius: 4,
-      }}
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      p={1}
     >
-      <label>
+      <Typography variant="button">
         <input
           type="checkbox"
           checked={stores}
           onChange={() => toggleLayer('stores')}
-        />{' '}
+        />
         Stores
-      </label>
-      <br />
-      <label>
+      </Typography>
+      <Typography variant="button">
         <input
           type="checkbox"
           checked={demographics}
           onChange={() => toggleLayer('demographics')}
-        />{' '}
-        demographics
-      </label>
-    </div>
+        />
+        Demographics
+      </Typography>
+    </Box>
   )
 }

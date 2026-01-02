@@ -1,0 +1,39 @@
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+
+export const Header = ({
+  isOpen,
+  setIsOpen,
+  children,
+}: {
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
+  children: React.ReactElement
+}) => (
+  <Box
+    position="absolute"
+    top={90}
+    left={10}
+    bgcolor="white"
+    borderRadius={2}
+    boxShadow="0 2px 8px rgba(0,0,0,0.15)"
+    zIndex={1000}
+    minWidth={250}
+  >
+    {/* Header */}
+    <Box
+      onClick={() => setIsOpen(!isOpen)}
+      p="12px 16px"
+      sx={{ cursor: 'pointer' }} // única excepción: cursor
+      borderBottom={isOpen ? '1px solid #eee' : 'none'}
+      fontWeight={600}
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Typography variant="h6">Editor</Typography>
+      <Typography variant="h6">{isOpen ? '▼' : '▶'}</Typography>
+    </Box>
+    {children}
+  </Box>
+)

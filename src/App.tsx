@@ -5,23 +5,23 @@ import { useMemo, useState } from 'react'
 import Map from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { BASEMAP } from '@deck.gl/carto'
-import { MapUISelector } from './UI/MapUISelector'
 import type { ILayerStyle } from './types/App.types'
 import { createLayers } from './utils/utils'
 import { LayerStyleEditor } from './UI/MapEditor'
 import { INITIAL_VIEW_STATE } from './constants/constants'
+import { Box } from '@mui/material'
 
 function App(): React.ReactNode {
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE)
   const [layersVisibility, setLayersVisibility] = useState({
-    stores: false,
-    demographics: true,
+    stores: true,
+    demographics: false,
   })
   const [customStyles, setCustomStyles] = useState<
     Record<string, Partial<ILayerStyle>>
   >({})
 
-  console.log(layersVisibility, customStyles)
+  console.log('customStyles', customStyles)
 
   const layers = useMemo(
     () => createLayers(layersVisibility, cartoConfig, customStyles),
@@ -57,7 +57,13 @@ function App(): React.ReactNode {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <Box
+      sx={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+      }}
+    >
       <Map
         mapStyle={BASEMAP.VOYAGER}
         viewState={viewState}
@@ -74,17 +80,15 @@ function App(): React.ReactNode {
         style={{ position: 'absolute', inset: '0' }}
       />
       {/* ----------- CONTROLS -------------- */}
-      <MapUISelector
-        layersVisibility={layersVisibility}
-        toggleLayer={toggleLayer}
-      />
       <LayerStyleEditor
         layersVisibility={layersVisibility}
         customStyles={customStyles}
+        setCustomStyles={setCustomStyles}
         onStyleUpdate={updateLayerStyle}
         onStyleReset={resetLayerStyle}
+        toggleLayer={toggleLayer}
       />
-    </div>
+    </Box>
   )
 }
 

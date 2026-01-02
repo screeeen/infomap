@@ -28,12 +28,12 @@ export const createLayers = (
     .map(layerKey => {
       const config = LAYERS_CONFIG[layerKey]
 
-      console.log(config, '->', layerKey)
-      console.log('customStyles', customStyles)
-      console.log(
-        'loadSource(config, cartoConfig)',
-        loadSource(config, cartoConfig)
-      )
+      // console.log(config, '->', layerKey)
+      // console.log('customStyles', customStyles)
+      // console.log(
+      //   'loadSource(config, cartoConfig)',
+      //   loadSource(config, cartoConfig)
+      // )
 
       return new VectorTileLayer({
         id: config.id,
