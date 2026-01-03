@@ -23,3 +23,16 @@ export interface ILayerConfig {
   displayName?: string
   description?: string
 }
+
+export type DomainRangeType = {
+  min: number
+  max: number
+  steps: number
+}
+
+export type DomainConfigType = {
+  revenue: DomainRangeType
+  income_per_capita: DomainRangeType
+}
+
+export type DomainKey = keyof DomainConfigType

@@ -1,51 +1,44 @@
-import {
-  colorBins,
-  vectorTableSource,
-  vectorTilesetSource,
-} from '@deck.gl/carto'
-import type { ILayerConfig } from '../types/App.types'
+import { vectorTableSource, vectorTilesetSource } from '@deck.gl/carto'
+import type { DomainConfigType, ILayerConfig } from '../types/App.types'
 
 export const SOURCE_LOADERS = {
   table: vectorTableSource,
   tileset: vectorTilesetSource,
 }
 
-const MIN_REVENUE = 1000000
-const MAX_REVENUE = 2000000
-const STEPS = 10
-
-export const genDomain = () => {
-  return Array.from({ length: STEPS }, (_, i) =>
-    Math.round(MIN_REVENUE + (i * (MAX_REVENUE - MIN_REVENUE)) / (STEPS - 1))
-  )
+export const DOMAIN_CONFIG: DomainConfigType = {
+  revenue: {
+    min: 1000000,
+    max: 2000000,
+    steps: 10,
+  },
+  income_per_capita: {
+    min: 10000,
+    max: 90000,
+    steps: 10,
+  },
 }
-
-const domain = genDomain()
 
 export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
   stores: {
     id: 'stores-layer',
     tableName: 'carto-demo-data.demo_tables.retail_stores',
     sourceType: 'table',
-    displayName: 'Tiendas',
+    displayName: 'Stores',
     style: {
-      getFillColor: colorBins({
-        attr: 'revenue',
-        domain: domain,
-        colors: 'Earth',
-      }),
-      lineWidthMinPixels: 1, // outline size
-      getLineColor: [255, 0, 0, 255], // outline color
-      pointRadiusMinPixels: 3, // radius
+      getFillColor: [200, 0, 0],
+      lineWidthMinPixels: 1,
+      getLineColor: [255, 0, 0, 255],
+      pointRadiusMinPixels: 3,
     },
   },
   demographics: {
     id: 'demographics-layer',
     tableName: 'carto-demo-data.demo_tilesets.sociodemographics_usa_blockgroup',
     sourceType: 'tileset',
-    displayName: 'Demografía',
+    displayName: 'Demographics',
     style: {
-      getFillColor: [0, 120, 100, 10],
+      getFillColor: [0, 120, 100, 50],
       lineWidthMinPixels: 1,
       getLineColor: [0, 0, 0, 50],
     },

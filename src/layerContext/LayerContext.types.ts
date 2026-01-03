@@ -5,12 +5,13 @@ export interface LayerContextType {
   layersVisibility: Record<string, boolean>
   selectedLayer: string
   customStyles: Record<string, Partial<ILayerStyle>>
-  toggleLayer: (layer: string) => void
+  toggleLayer: (layer: 'stores' | 'demographics') => void
   updateLayerStyle: (
     layerKey: string,
     styleUpdates: Partial<ILayerStyle>
   ) => void
-  resetLayerStyle: (layerKey: string) => void
+  handleColumns: (columns: string[]) => void
+  columns: string[]
 }
 
 export interface LayerProviderProps {

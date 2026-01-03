@@ -5,13 +5,15 @@ import { LayerContext } from './LayerContext'
 
 export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
   const [layersVisibility, setLayersVisibility] = useState({
-    stores: true,
-    demographics: false,
+    stores: false,
+    demographics: true,
   })
 
   const [customStyles, setCustomStyles] = useState<
     Record<string, Partial<ILayerStyle>>
   >({})
+
+  const [columns, setColumns] = useState<string[] | undefined>(undefined)
 
   const toggleLayer = (layer: keyof typeof layersVisibility) => {
     setLayersVisibility(prev => ({
@@ -33,18 +35,12 @@ export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
     }))
   }
 
-  const resetLayerStyle = (layerKey: string) => {
-    setCustomStyles(prev => {
-      const newStyles = { ...prev }
-      delete newStyles[layerKey]
-      return newStyles
-    })
-  }
-
   const selectedLayer =
     (
       Object.keys(layersVisibility) as Array<keyof typeof layersVisibility>
     ).find(key => layersVisibility[key]) || 'stores'
+
+  const handleColumns = (columns: string[] | undefined) => setColumns(columns)
 
   return (
     <LayerContext.Provider
@@ -54,7 +50,8 @@ export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
         customStyles,
         toggleLayer,
         updateLayerStyle,
-        resetLayerStyle,
+        handleColumns,
+        columns,
       }}
     >
       {children}

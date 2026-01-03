@@ -6,7 +6,8 @@ import { Fill } from './Fill'
 import { Radius } from './Radius'
 import { OutlineWidth } from './OutlineWidth'
 import { OutLineColor } from './OutLineColor'
-import { Revenue } from './Revenue'
+import { DetailsChecker } from './DetailsChecker'
+import { useLayerContext } from '../layerContext/useLayerContext'
 
 // interface Editor {
 //   layersVisibility: Record<string, boolean>
@@ -19,6 +20,7 @@ import { Revenue } from './Revenue'
 
 export const Editor = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { columns } = useLayerContext()
 
   return (
     <Header isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -26,11 +28,12 @@ export const Editor = () => {
         {isOpen && (
           <Box p={1}>
             <MapSelector />
-            <Fill />
+            {!columns && <Fill />}
             <Radius />
             <OutlineWidth />
             <OutLineColor />
-            <Revenue />
+            <DetailsChecker filter="revenue" />
+            <DetailsChecker filter="income_per_capita" />
           </Box>
         )}
       </Paper>

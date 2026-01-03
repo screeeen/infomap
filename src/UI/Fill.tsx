@@ -27,10 +27,10 @@ export const Fill = () => {
     <>
       <Typography variant="body2">Fill</Typography>
 
-      {['R', 'G', 'B'].map((label, index) => {
+      {['R', 'G', 'B', 'A'].map((label, index) => {
         const currentStyle = customStyles[selectedLayer] || {}
         const currentColor = currentStyle.getFillColor ||
-          layerConfig.style.getFillColor || [0, 0, 0]
+          layerConfig.style.getFillColor || [0, 0, 0, 0]
 
         return (
           <Box key={label} px={1}>

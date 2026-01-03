@@ -13,10 +13,12 @@ import { useLayerContext } from './layerContext/useLayerContext'
 export const CartoMap = (): React.ReactNode => {
   const { layersVisibility, customStyles } = useLayerContext()
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE)
+  const { columns } = useLayerContext()
 
   const layers = useMemo(
-    () => createLayers(layersVisibility, cartoConfig, customStyles),
-    [layersVisibility, customStyles]
+    () =>
+      createLayers({ layersVisibility, cartoConfig, customStyles, columns }),
+    [layersVisibility, customStyles, columns]
   )
 
   return (

@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box'
+import { Box, Paper } from '@mui/material'
 import Typography from '@mui/material/Typography'
 
 export const Header = ({
@@ -19,19 +19,21 @@ export const Header = ({
     zIndex={1000}
     minWidth={250}
   >
-    <Box
-      onClick={() => setIsOpen(!isOpen)}
-      p="12px 16px"
-      sx={{ cursor: 'pointer' }} // única excepción: cursor
-      borderBottom={isOpen ? '1px solid #eee' : 'none'}
-      fontWeight={600}
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <Typography variant="h6">Editor</Typography>
-      <Typography variant="h6">{isOpen ? '▼' : '▶'}</Typography>
-    </Box>
+    <Paper square={false}>
+      <Box
+        onClick={() => setIsOpen(!isOpen)}
+        p="12px 16px"
+        sx={{ cursor: 'pointer' }} // única excepción: cursor
+        borderBottom={isOpen ? '1px solid #eee' : 'none'}
+        fontWeight={600}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Typography variant="h6">Editor</Typography>
+        <Typography variant="h6">{isOpen ? '▼' : '▶'}</Typography>
+      </Box>
+    </Paper>
     {children}
   </Box>
 )

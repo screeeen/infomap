@@ -30,7 +30,7 @@ export const OutLineColor = (): ReactElement => {
     <>
       <Typography variant="body2">Outline Color</Typography>
 
-      {['R', 'G', 'B'].map((label, index) => {
+      {['R', 'G', 'B', 'A'].map((label, index) => {
         const currentStyle = customStyles[selectedLayer] || {}
         const currentColor = currentStyle.getLineColor ||
           layerConfig.style.getLineColor || [0, 0, 0]
