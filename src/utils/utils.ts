@@ -50,6 +50,7 @@ export const createLayers = ({
       return new VectorTileLayer({
         id: config.id,
         data: loadSource({ config, cartoConfig, columns }),
+        pickable: config.pickable,
         ...config.style,
         ...(customStyles?.[layerKey] ?? {}),
       })

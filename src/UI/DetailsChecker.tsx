@@ -27,7 +27,7 @@ export const DetailsChecker = ({
       const domain = genDomain(DOMAIN_CONFIG[filter as keyof DomainConfigType])
       handleColumns(columns)
       const [value] = columns
-      console.log('value', value)
+
       updateLayerStyle(selectedLayer, {
         getFillColor: colorBins({
           attr: value,

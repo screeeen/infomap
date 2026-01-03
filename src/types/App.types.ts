@@ -22,6 +22,7 @@ export interface ILayerConfig {
   style: ILayerStyle
   displayName?: string
   description?: string
+  pickable?: boolean
 }
 
 export type DomainRangeType = {

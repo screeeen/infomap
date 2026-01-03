@@ -25,6 +25,7 @@ export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
     tableName: 'carto-demo-data.demo_tables.retail_stores',
     sourceType: 'table',
     displayName: 'Stores',
+    pickable: true,
     style: {
       getFillColor: [200, 0, 0],
       lineWidthMinPixels: 1,
@@ -37,6 +38,7 @@ export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
     tableName: 'carto-demo-data.demo_tilesets.sociodemographics_usa_blockgroup',
     sourceType: 'tileset',
     displayName: 'Demographics',
+    pickable: true,
     style: {
       getFillColor: [0, 120, 100, 50],
       lineWidthMinPixels: 1,
