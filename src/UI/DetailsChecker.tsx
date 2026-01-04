@@ -4,30 +4,38 @@ import { Box, Checkbox, FormControlLabel } from '@mui/material'
 import { colorBins } from '@deck.gl/carto'
 import { genDomain } from '../utils/utils'
 import { DOMAIN_CONFIG, LAYERS_CONFIG } from '../constants/constants'
-import type { DomainConfigType } from '../types/App.types'
+import type { CustomStyles, DomainConfigType } from '../types/App.types'
+import { type Color } from 'deck.gl'
 
 export const DetailsChecker = ({
   filter,
 }: {
   filter: string
 }): ReactElement => {
-  const { handleColumns, updateLayerStyle, selectedLayer } = useLayerContext()
-  const [showFilter, setShowFilter] = useState<boolean>()
+  const { customStyles, showColumns, updateLayerStyle, selectedLayer } =
+    useLayerContext()
+  const [previousColor, setPreviousColor] = useState<Color | null>(null)
+
+  console.log('previousColor', previousColor)
 
   const handleChange = ({
-    showFilter,
+    previousColor,
     selectedLayer,
     columns,
   }: {
-    showFilter?: boolean
+    previousColor?: Color | null
     selectedLayer: string
-    columns?: string[]
+    columns: string[]
   }) => {
-    if (!showFilter) {
+    if (!previousColor) {
       const domain = genDomain(DOMAIN_CONFIG[filter as keyof DomainConfigType])
-      handleColumns(columns)
-      const [value] = columns
+      showColumns(columns)
+      const prevColor =
+        (customStyles as CustomStyles)[selectedLayer]?.getFillColor ||
+        LAYERS_CONFIG[selectedLayer].style.getFillColor
+      setPreviousColor(prevColor as Color)
 
+      const [value] = columns
       updateLayerStyle(selectedLayer, {
         getFillColor: colorBins({
           attr: value,
@@ -35,15 +43,12 @@ export const DetailsChecker = ({
           colors: 'Earth',
         }),
       })
-      setShowFilter(true)
     } else {
-      const layerConfig = LAYERS_CONFIG[selectedLayer]
-      handleColumns(undefined)
+      showColumns(columns)
       updateLayerStyle(selectedLayer, {
-        // getFillColor: [200, 0, 0],
-        getFillColor: layerConfig.style.getFillColor,
+        getFillColor: previousColor,
       })
-      setShowFilter(false)
+      setPreviousColor(null)
     }
   }
 
@@ -56,7 +61,7 @@ export const DetailsChecker = ({
             <Checkbox
               onChange={() =>
                 handleChange({
-                  showFilter,
+                  previousColor,
                   selectedLayer,
                   columns: [`${filter}`],
                 })

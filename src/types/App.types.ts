@@ -1,4 +1,7 @@
-import type { Color } from '@deck.gl/core'
+import type { AccessorFunction, Color } from '@deck.gl/core'
+import type { Feature, Geometry, GeoJsonProperties } from 'geojson'
+
+export type mapType = 'stores' | 'demographics'
 
 export type CartoConfigType = {
   apiBaseUrl: string
@@ -10,9 +13,17 @@ export type SourceType = 'table' | 'tileset'
 
 export interface ILayerStyle {
   pointRadiusMinPixels?: number
-  getFillColor?: Color
-  getLineColor?: Color
+  getFillColor?:
+    | Color
+    | AccessorFunction<Feature<Geometry, GeoJsonProperties>, Color>
+  getLineColor?:
+    | Color
+    | AccessorFunction<Feature<Geometry, GeoJsonProperties>, Color>
   lineWidthMinPixels?: number
+}
+
+export interface CustomStyles {
+  [key: string]: Partial<ILayerStyle>
 }
 
 export interface ILayerConfig {

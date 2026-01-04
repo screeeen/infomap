@@ -22,7 +22,7 @@ export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
 
   const updateLayerStyle = (
     layerKey: string,
-    styleUpdates: Partial<ILayerStyle>
+    styleUpdates: Partial<ILayerStyle> | (() => void)
   ) => {
     setCustomStyles(prev => ({
       ...prev,
@@ -38,7 +38,7 @@ export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
       Object.keys(layersVisibility) as Array<keyof typeof layersVisibility>
     ).find(key => layersVisibility[key]) || 'stores'
 
-  const handleColumns = (columns: string[] | undefined) => setColumns(columns)
+  const showColumns = (columns: string[] | undefined) => setColumns(columns)
 
   return (
     <LayerContext.Provider
@@ -48,7 +48,7 @@ export const LayerProvider: React.FC<LayerProviderProps> = ({ children }) => {
         customStyles,
         toggleLayer,
         updateLayerStyle,
-        handleColumns,
+        showColumns,
         columns,
       }}
     >

@@ -4,11 +4,11 @@ import { useLayerContext } from '../layerContext/useLayerContext'
 import { LAYERS_CONFIG } from '../constants/constants'
 import { Slider } from '@mui/material'
 import { Box } from '@mui/material'
-import type { ILayerConfig } from '../types/App.types'
+import type { CustomStyles, ILayerConfig } from '../types/App.types'
+import type { Color } from 'deck.gl'
 
 export const OutLineColor = (): ReactElement => {
   const { selectedLayer, customStyles, updateLayerStyle } = useLayerContext()
-
   const layerConfig = LAYERS_CONFIG[selectedLayer as keyof ILayerConfig]
 
   const handleColorChange = (
@@ -16,14 +16,14 @@ export const OutLineColor = (): ReactElement => {
     colorIndex: number,
     value: number
   ) => {
-    const currentStyle = customStyles[layerKey] || {}
+    const currentStyle = (customStyles as CustomStyles)[layerKey] || {}
     const currentColor = currentStyle.getLineColor ||
       LAYERS_CONFIG[layerKey].style.getLineColor || [0, 0, 0]
 
     const newColor = [...currentColor]
     newColor[colorIndex] = value
 
-    updateLayerStyle(layerKey, { getLineColor: newColor as number[] })
+    updateLayerStyle(layerKey, { getLineColor: newColor as Color })
   }
 
   return (
@@ -31,7 +31,7 @@ export const OutLineColor = (): ReactElement => {
       <Typography variant="body2">Outline Color</Typography>
 
       {['R', 'G', 'B', 'A'].map((label, index) => {
-        const currentStyle = customStyles[selectedLayer] || {}
+        const currentStyle = (customStyles as CustomStyles)[selectedLayer] || {}
         const currentColor = currentStyle.getLineColor ||
           layerConfig.style.getLineColor || [0, 0, 0]
 
@@ -42,12 +42,14 @@ export const OutLineColor = (): ReactElement => {
               <Slider
                 min={0}
                 max={255}
-                value={currentColor[index]}
+                value={(currentColor as Color)[index]}
                 onChange={(_, value) =>
                   handleColorChange(selectedLayer, index, value as number)
                 }
               />
-              <Typography variant="body2">{currentColor[index]}</Typography>
+              <Typography variant="body2">
+                {(currentColor as Color)[index]}
+              </Typography>
             </Box>
           </Box>
         )
