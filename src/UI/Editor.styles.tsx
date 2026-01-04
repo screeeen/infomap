@@ -7,3 +7,9 @@ export const Preview = styled.div<{ color: string }>`
   border: 1px solid #ddd;
   background-color: ${({ color }: { color: string }) => `rgba(${color}, 1)`};
 `
+
+export const EditorContainer = styled('div')({
+  height: '92vh',
+  overflow: 'auto',
+  paddingBottom: '2rem',
+})

@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Header } from './Header'
 import { MapSelector } from './MapSelector'
-import { Box, Paper } from '@mui/material'
+import { Paper } from '@mui/material'
 import { Fill } from './Fill'
 import { Radius } from './Radius'
 import { OutlineWidth } from './OutlineWidth'
 import { OutLineColor } from './OutLineColor'
 import { DetailsChecker } from './DetailsChecker'
+import { EditorContainer } from './Editor.styles'
 
 export const Editor = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,7 +16,7 @@ export const Editor = () => {
     <Header isOpen={isOpen} setIsOpen={setIsOpen}>
       <Paper square={false}>
         {isOpen && (
-          <Box p={1}>
+          <EditorContainer>
             <MapSelector />
             <Fill />
             <Radius />
@@ -23,7 +24,7 @@ export const Editor = () => {
             <OutLineColor />
             <DetailsChecker filter="revenue" />
             <DetailsChecker filter="income_per_capita" />
-          </Box>
+          </EditorContainer>
         )}
       </Paper>
     </Header>

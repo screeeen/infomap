@@ -6,11 +6,10 @@ import { BASEMAP } from '@deck.gl/carto'
 import { createLayers } from './utils/utils'
 import { Editor } from './UI/Editor'
 import { INITIAL_VIEW_STATE } from './constants/constants'
-import { Box } from '@mui/material'
 import { useLayerContext } from './layerContext/useLayerContext'
-
+import { Box } from '@mui/material'
+import { getTooltip } from './utils/getTooltip'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { getTooltip } from './UI/getTooltip'
 
 export const CartoMap = (): React.ReactNode => {
   const { layersVisibility, customStyles } = useLayerContext()

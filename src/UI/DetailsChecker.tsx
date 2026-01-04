@@ -16,8 +16,6 @@ export const DetailsChecker = ({
     useLayerContext()
   const [previousColor, setPreviousColor] = useState<Color | null>(null)
 
-  console.log('previousColor', previousColor)
-
   const handleChange = ({
     previousColor,
     selectedLayer,

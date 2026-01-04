@@ -2,9 +2,9 @@ import { VectorTileLayer } from '@deck.gl/carto'
 import { LAYERS_CONFIG, SOURCE_LOADERS } from '../constants/constants'
 import type {
   CartoConfigType,
+  CustomStyles,
   DomainRangeType,
   ILayerConfig,
-  ILayerStyle,
 } from '../types/App.types'
 
 export const loadSource = ({
@@ -39,8 +39,8 @@ export const createLayers = ({
 }: {
   layersVisibility: Record<string, boolean>
   cartoConfig: CartoConfigType
-  customStyles?: Record<string, Partial<ILayerStyle>>
-  columns: string[]
+  customStyles?: CustomStyles | (() => void)
+  columns: string[] | undefined
 }) =>
   Object.keys(layersVisibility)
     .filter(key => layersVisibility[key])
