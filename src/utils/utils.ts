@@ -40,7 +40,7 @@ export const createLayers = ({
   layersVisibility: Record<string, boolean>
   cartoConfig: CartoConfigType
   customStyles?: Record<string, Partial<ILayerStyle>>
-  columns?: string[]
+  columns: string[]
 }) =>
   Object.keys(layersVisibility)
     .filter(key => layersVisibility[key])

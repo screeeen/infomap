@@ -50,7 +50,7 @@ export const LAYERS_CONFIG: Record<string, ILayerConfig> = {
 export const INITIAL_VIEW_STATE = {
   latitude: 39.8097343,
   longitude: -98.5556199,
-  zoom: 6,
+  zoom: 2,
   bearing: 0,
   pitch: 30,
 }

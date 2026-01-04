@@ -8,11 +8,14 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false,
 
     /* Linting */
     "strict": true,

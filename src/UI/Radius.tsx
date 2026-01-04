@@ -4,6 +4,7 @@ import { Slider } from '@mui/material'
 import { Box } from '@mui/material'
 import { useLayerContext } from '../layerContext/useLayerContext'
 import type { ReactElement } from 'react'
+import type { CustomStyles } from '../types/App.types'
 
 export const Radius = (): ReactElement => {
   const { selectedLayer, customStyles, updateLayerStyle } = useLayerContext()
@@ -20,7 +21,8 @@ export const Radius = (): ReactElement => {
           min={0}
           max={20}
           value={
-            customStyles[selectedLayer]?.pointRadiusMinPixels ||
+            (customStyles as CustomStyles)[selectedLayer]
+              ?.pointRadiusMinPixels ||
             LAYERS_CONFIG[selectedLayer].style.pointRadiusMinPixels ||
             3
           }
@@ -29,7 +31,8 @@ export const Radius = (): ReactElement => {
           }
         />
         <Typography variant="button">
-          {customStyles[selectedLayer]?.pointRadiusMinPixels ||
+          {(customStyles as CustomStyles)[selectedLayer]
+            ?.pointRadiusMinPixels ||
             LAYERS_CONFIG[selectedLayer].style.pointRadiusMinPixels ||
             3}
           px
