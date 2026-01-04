@@ -1,5 +1,9 @@
 import { VectorTileLayer } from '@deck.gl/carto'
-import { LAYERS_CONFIG, SOURCE_LOADERS } from '../constants/constants'
+import {
+  columnsKey,
+  LAYERS_CONFIG,
+  SOURCE_LOADERS,
+} from '../constants/constants'
 import type {
   CartoConfigType,
   CustomStyles,
@@ -14,7 +18,7 @@ export const loadSource = ({
 }: {
   config: ILayerConfig
   cartoConfig: CartoConfigType
-  columns: string[]
+  columns?: string[]
 }) => {
   const loader = SOURCE_LOADERS[config.sourceType]
 
@@ -47,9 +51,17 @@ export const createLayers = ({
     .map(layerKey => {
       const config = LAYERS_CONFIG[layerKey]
 
+      // late fix for doing the call correctly when changing filter
+      const applicableColumns =
+        columns &&
+        layerKey in columnsKey &&
+        columns.includes(columnsKey[layerKey as keyof typeof columnsKey])
+          ? columns
+          : undefined
+
       return new VectorTileLayer({
         id: config.id,
-        data: loadSource({ config, cartoConfig, columns }),
+        data: loadSource({ config, cartoConfig, columns: applicableColumns }),
         pickable: config.pickable,
         ...config.style,
         ...(customStyles?.[layerKey] ?? {}),

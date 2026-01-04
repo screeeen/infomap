@@ -8,9 +8,11 @@ import { OutlineWidth } from './OutlineWidth'
 import { OutLineColor } from './OutLineColor'
 import { DetailsChecker } from './DetailsChecker'
 import { EditorContainer } from './Editor.styles'
+import { useLayerContext } from '../layerContext/useLayerContext'
 
 export const Editor = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { selectedLayer } = useLayerContext()
 
   return (
     <Header isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -19,11 +21,13 @@ export const Editor = () => {
           <EditorContainer>
             <MapSelector />
             <Fill />
-            <Radius />
+            {selectedLayer === 'stores' && <Radius />}
             <OutlineWidth />
             <OutLineColor />
-            <DetailsChecker filter="revenue" />
-            <DetailsChecker filter="income_per_capita" />
+            {selectedLayer === 'stores' && <DetailsChecker filter="revenue" />}
+            {selectedLayer === 'demographics' && (
+              <DetailsChecker filter="income_per_capita" />
+            )}
           </EditorContainer>
         )}
       </Paper>

@@ -54,3 +54,8 @@ export const INITIAL_VIEW_STATE = {
   bearing: 0,
   pitch: 30,
 }
+
+export const columnsKey = {
+  stores: 'revenue',
+  demographics: 'income_per_capita',
+}
