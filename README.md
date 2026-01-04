@@ -147,5 +147,16 @@ infomap/
 - Domains for columns can be configurable and dynamic based on min and max
 - Widget would need a redux store? Somehow got confused with versions, tried to pass `widgetSource` from dataSource but didn't work. Tried to extranct the info and run `getFormula` but couldn't manage to run it. I would need more time and maybe some tips ;-) to get them running!
 - Overall architecture is a little mess, and types too... that can be more straight and simplified. Also UI is super sketchy, (too many casts!) It can be improved by keeping the state of each color in a sublevel and not in the main context. I believe it would improve performance too.
+- https://github.com/screeeen/infomap/blob/master/src/utils/utils.ts#L54 I didn't see it coming... sorry!
 - Storybook and carto UI latest didn't match some components are not exported! I used `3.1.0-alpha.16` seems latest.
 - Tried to run typescript base-3 template but had a little confusion with the dependecies and node too. Had to ditch the idea
+
+# AI chats
+
+Most relevant conversations
+
+- Boilerplate: https://chatgpt.com/share/695ad14b-1754-8007-bdf9-1a7a6dca7c20
+- Tooltip: https://chatgpt.com/share/695ad117-a608-8007-b555-11b37941b37f
+- Styles: https://chatgpt.com/share/695ad0f5-8a4c-8007-98ce-2a4d988f627a
+- Widget: https://chatgpt.com/share/695ad0ad-2d94-8007-95e1-1660d39f7b3e
+- Widget Claude: https://claude.ai/share/ad9e29a0-3cda-4c8a-8fe1-54b5e26e669a
