@@ -3,7 +3,7 @@ import { useLayerContext } from '../layerContext/useLayerContext'
 import { Box, Checkbox, FormControlLabel } from '@mui/material'
 import { colorBins } from '@deck.gl/carto'
 import { genDomain } from '../utils/utils'
-import { DOMAIN_CONFIG } from '../constants/constants'
+import { DOMAIN_CONFIG, LAYERS_CONFIG } from '../constants/constants'
 import type { DomainConfigType } from '../types/App.types'
 
 export const DetailsChecker = ({
@@ -37,9 +37,11 @@ export const DetailsChecker = ({
       })
       setShowFilter(true)
     } else {
+      const layerConfig = LAYERS_CONFIG[selectedLayer]
       handleColumns(undefined)
       updateLayerStyle(selectedLayer, {
-        getFillColor: [200, 0, 0],
+        // getFillColor: [200, 0, 0],
+        getFillColor: layerConfig.style.getFillColor,
       })
       setShowFilter(false)
     }

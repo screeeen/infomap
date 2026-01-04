@@ -2,6 +2,7 @@ import { Box, Slider } from '@mui/material'
 import { Typography } from '@carto/react-ui'
 import { useLayerContext } from '../layerContext/useLayerContext'
 import { LAYERS_CONFIG } from '../constants/constants'
+import type { Color } from 'deck.gl'
 
 export const Fill = () => {
   const { selectedLayer, updateLayerStyle, customStyles } = useLayerContext()
@@ -20,7 +21,7 @@ export const Fill = () => {
     const newColor = [...currentColor]
     newColor[colorIndex] = value
 
-    updateLayerStyle(layerKey, { getFillColor: newColor as number[] })
+    updateLayerStyle(layerKey, { getFillColor: newColor as Color })
   }
 
   return (
