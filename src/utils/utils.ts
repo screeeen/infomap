@@ -1,29 +1,10 @@
 import { VectorTileLayer } from '@deck.gl/carto'
-import { LAYERS_CONFIG, SOURCE_LOADERS } from '../constants/constants'
+import { LAYERS_CONFIG } from '../constants/constants'
+import type { DomainRangeType, ILayerStyle } from '../types/App.types'
 import type {
-  CartoConfigType,
-  DomainRangeType,
-  ILayerConfig,
-  ILayerStyle,
-} from '../types/App.types'
-
-export const loadSource = ({
-  config,
-  cartoConfig,
-  columns,
-}: {
-  config: ILayerConfig
-  cartoConfig: CartoConfigType
-  columns: string[]
-}) => {
-  const loader = SOURCE_LOADERS[config.sourceType]
-
-  return loader({
-    ...cartoConfig,
-    tableName: config.tableName,
-    columns: columns,
-  })
-}
+  VectorTableSourceResponse,
+  VectorTilesetSourceResponse,
+} from '@carto/api-client'
 
 export const genDomain = ({ min, max, steps }: DomainRangeType) => {
   return Array.from({ length: steps }, (_, i) =>
@@ -33,26 +14,26 @@ export const genDomain = ({ min, max, steps }: DomainRangeType) => {
 
 export const createLayers = ({
   layersVisibility,
-  cartoConfig,
+  sourceData,
   customStyles,
-  columns,
 }: {
   layersVisibility: Record<string, boolean>
-  cartoConfig: CartoConfigType
+  sourceData: VectorTableSourceResponse | VectorTilesetSourceResponse | null
   customStyles?: Record<string, Partial<ILayerStyle>>
-  columns?: string[]
-}) =>
-  Object.keys(layersVisibility)
+}) => {
+  if (!sourceData) return
+  return Object.keys(layersVisibility)
     .filter(key => layersVisibility[key])
     .map(layerKey => {
       const config = LAYERS_CONFIG[layerKey]
 
       return new VectorTileLayer({
         id: config.id,
-        data: loadSource({ config, cartoConfig, columns }),
+        data: sourceData,
         pickable: config.pickable,
         ...config.style,
         ...(customStyles?.[layerKey] ?? {}),
       })
     })
     .filter(Boolean)
+}

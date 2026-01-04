@@ -11,8 +11,15 @@
   },
   "dependencies": {
     "@carto/carto.js": "^4.2.2",
+    "@carto/react-api": "^3.1.0-alpha.16",
+    "@carto/react-basemaps": "^3.1.0-alpha.16",
     "@carto/react-core": "^3.1.0-alpha.16",
+    "@carto/react-redux": "^3.1.0-alpha.16",
     "@carto/react-ui": "^3.1.0-alpha.16",
+    "@carto/react-widgets": "^3.1.0-alpha.16",
+    "@carto/react-workers": "^3.1.0-alpha.16",
+    "@deck.gl-community/editable-layers": "^9.1.1",
+    "@deck.gl-community/layers": "^9.1.1",
     "@deck.gl/carto": "^9.2.5",
     "@deck.gl/core": "^9.2.5",
     "@deck.gl/geo-layers": "^9.2.5",
@@ -23,6 +30,7 @@
     "@formatjs/intl-localematcher": "^0.7.3",
     "@mui/icons-material": "^7.3.6",
     "@mui/material": "^7.3.6",
+    "@reduxjs/toolkit": "^2.11.2",
     "@turf/bbox-clip": "^7.3.1",
     "@turf/bbox-polygon": "^7.3.1",
     "@turf/boolean-intersects": "^7.3.1",
@@ -37,7 +45,8 @@
     "react": "18",
     "react-dom": "18",
     "react-intl": "^8.0.9",
-    "react-map-gl": "8.0.0"
+    "react-map-gl": "8.0.0",
+    "react-redux": "^9.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
