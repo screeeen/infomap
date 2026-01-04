@@ -16,6 +16,8 @@ export const DetailsChecker = ({
     useLayerContext()
   const [previousColor, setPreviousColor] = useState<Color | null>(null)
 
+  const { columns } = useLayerContext()
+
   const handleChange = ({
     previousColor,
     selectedLayer,
@@ -57,6 +59,7 @@ export const DetailsChecker = ({
           label={`Show ${filter}`}
           control={
             <Checkbox
+              checked={columns?.join() === filter}
               onChange={() =>
                 handleChange({
                   previousColor,
