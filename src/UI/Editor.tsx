@@ -9,15 +9,6 @@ import { OutLineColor } from './OutLineColor'
 import { DetailsChecker } from './DetailsChecker'
 import { useLayerContext } from '../layerContext/useLayerContext'
 
-// interface Editor {
-//   layersVisibility: Record<string, boolean>
-//   customStyles: Record<string, Partial<ILayerStyle>>
-//   setCustomStyles: (customStyles: string) => void
-//   onStyleUpdate: (layerKey: string, styleUpdates: Partial<ILayerStyle>) => void
-//   onStyleReset: (layerKey: string) => void
-//   toggleLayer: (layer: string) => void
-// }
-
 export const Editor = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { columns } = useLayerContext()
