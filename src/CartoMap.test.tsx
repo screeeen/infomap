@@ -3,9 +3,8 @@ import { render, screen } from '@testing-library/react'
 import { CartoMap } from './CartoMap'
 import { useLayerContext } from './layerContext/useLayerContext'
 import { createLayers } from './utils/utils'
-import { INITIAL_VIEW_STATE } from './constants/constants'
+import '@testing-library/jest-dom'
 
-// // Mocks
 vi.mock('deck.gl', () => ({
   default: vi.fn(({ children, ...props }) => (
     <div data-testid="deckgl" {...props}>
@@ -85,7 +84,6 @@ describe('CartoMap', () => {
 
     expect(createLayers).toHaveBeenCalledTimes(1)
 
-    // Cambiar el contexto
     vi.mocked(useLayerContext).mockReturnValue({
       ...mockLayerContext,
       layersVisibility: { layer1: false, layer2: true },
@@ -101,7 +99,6 @@ describe('CartoMap', () => {
 
     expect(createLayers).toHaveBeenCalledTimes(1)
 
-    // Cambiar el contexto
     vi.mocked(useLayerContext).mockReturnValue({
       ...mockLayerContext,
       customStyles: { color: '#00ff00' },
@@ -117,7 +114,6 @@ describe('CartoMap', () => {
 
     expect(createLayers).toHaveBeenCalledTimes(1)
 
-    // Cambiar el contexto
     vi.mocked(useLayerContext).mockReturnValue({
       ...mockLayerContext,
       columns: ['col1', 'col2', 'col3'],
@@ -144,12 +140,10 @@ describe('CartoMap', () => {
 
     expect(createLayers).toHaveBeenCalledTimes(1)
 
-    // Mismo contexto
     vi.mocked(useLayerContext).mockReturnValue(mockLayerContext)
 
     rerender(<CartoMap />)
 
-    // No debería llamarse de nuevo porque las dependencias no cambiaron
     expect(createLayers).toHaveBeenCalledTimes(1)
   })
 

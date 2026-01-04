@@ -7,11 +7,9 @@ import { Radius } from './Radius'
 import { OutlineWidth } from './OutlineWidth'
 import { OutLineColor } from './OutLineColor'
 import { DetailsChecker } from './DetailsChecker'
-import { useLayerContext } from '../layerContext/useLayerContext'
 
 export const Editor = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const { columns } = useLayerContext()
 
   return (
     <Header isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -19,7 +17,7 @@ export const Editor = () => {
         {isOpen && (
           <Box p={1}>
             <MapSelector />
-            {!columns && <Fill />}
+            <Fill />
             <Radius />
             <OutlineWidth />
             <OutLineColor />

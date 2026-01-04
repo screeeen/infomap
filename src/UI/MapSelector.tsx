@@ -19,6 +19,7 @@ export const MapSelector = () => {
           type="checkbox"
           checked={stores}
           onChange={() => toggleLayer('stores')}
+          aria-label="stores-checkbox"
         />
         Stores
       </Typography>
@@ -27,6 +28,7 @@ export const MapSelector = () => {
           type="checkbox"
           checked={demographics}
           onChange={() => toggleLayer('demographics')}
+          aria-label="demographics-checkbox"
         />
         Demographics
       </Typography>
