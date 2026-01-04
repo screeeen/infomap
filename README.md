@@ -150,6 +150,7 @@ infomap/
 - https://github.com/screeeen/infomap/blob/master/src/utils/utils.ts#L54 I didn't see it coming... sorry!
 - Storybook and carto UI latest didn't match some components are not exported! I used `3.1.0-alpha.16` seems latest.
 - Tried to run typescript base-3 template but had a little confusion with the dependecies and node too. Had to ditch the idea
+- Overall I would like to optimize it and understand better the application
 
 # AI chats
 

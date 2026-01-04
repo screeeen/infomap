@@ -12,7 +12,7 @@ import { useLayerContext } from '../layerContext/useLayerContext'
 
 export const Editor = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const { selectedLayer } = useLayerContext()
+  const { selectedLayer, columns } = useLayerContext()
 
   return (
     <Header isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -20,7 +20,7 @@ export const Editor = () => {
         {isOpen && (
           <EditorContainer>
             <MapSelector />
-            <Fill />
+            {!columns && <Fill />}
             {selectedLayer === 'stores' && <Radius />}
             <OutlineWidth />
             <OutLineColor />
