@@ -1,8 +1,6 @@
 # Infomap
 
-**Infomap** is a **web-based geospatial visualization tool** built with **React, TypeScript, Vite, and Carto**. It allows you to visualize large-scale geographic and network data interactively, rendering points, lines, and polygons on a high-performance WebGL map. Think of it as a **digital cartography platform** for your datasets, where clusters, layers, and spatial relationships are immediately visible.
-
-Carto enables smooth, GPU-accelerated rendering, making it possible to explore tens of thousands of points and connections in real-time.
+**Infomap** is a **web-based geospatial visualization tool** built with **React, TypeScript, Vite, and Carto**.
 
 ---
 
@@ -13,8 +11,7 @@ Carto enables smooth, GPU-accelerated rendering, making it possible to explore t
 3. [Running the Project](#running-the-project)
 4. [Available Scripts](#available-scripts)
 5. [Project Structure](#project-structure)
-6. [Directory Overview](#directory-overview)
-7. [Notes](#notes)
+6. [Notes](#notes)
 
 ---
 
@@ -31,7 +28,7 @@ Key technologies:
 - **TypeScript** – Static type safety
 - **Vite** – Fast development and build tool
 - **Deck.gl** – High-performance WebGL visualization library
-- **Mapbox-gl ** – For map basemaps
+- **Mapbox-gl** – For map basemaps
 
 ---
 
@@ -42,10 +39,10 @@ Make sure you have:
 - **Node.js** v16+
 - **npm** or **Yarn**
 - env vars
-  -VITE_API_PROJECT_ID
-  -VITE_API_ACCESS_TOKEN
-  -VITE_API_BASE_URL
-  -VITE_CONNECTION_NAME
+  - VITE_API_PROJECT_ID
+  - VITE_API_ACCESS_TOKEN
+  - VITE_API_BASE_URL
+  - VITE_CONNECTION_NAME
 
 ---
 
@@ -116,41 +113,28 @@ infomap/
 └─ eslint.config.js         # ESLint configuration
 ```
 
-## Directory Overview
-
-**src/** - Main source directory containing all application code
-
-- **cartoConfig/** - Carto configuration and credentials
-- **constants/** - Map layer configurations and UI initial states
-- **layerContext/** - React Context for state management and shared functions
-- **test/** - Test setup files
-- **types/** - Common TypeScript type definitions
-- **UI/** - UI components for the map layers editor
-- **utils/** - Helper functions for data processing
-
-**Configuration Files** - Project configuration at the root level
-
 ## Notes
 
-- There is a initial state `constants.ts` and config of each layer for the maps.
+- Initial states are stored in `constants.ts`. Also the config of each layer for the maps.
 - Each layer has its own loader depending on the data type of the map (table, tileset)
-- Loader dataSource function can be found at `utils.ts`, it could be done with a custom hook keeping loading and error states. Left it this way for simplicity.
-- Both layers can be seen together, this increases somehow complexity on state
-- Some types can be refactored and grouped for clarity and security
-- There are tests for `CartoMap.test.tsx`, `MapSelector.test.tsx`,`Fill.test.tsx` as examples.
+- Loader dataSource function can be found at `utils.ts`, it could be done with a custom hook keeping loading and error states as seen in this branch https://github.com/screeeen/infomap/blob/widget/src/hooks/useSourceData.ts so it could allow (maybe) more versatility. Left it this way in master for simplicity.
+- Both layers at the map can be seen together, this increases somehow complexity
+- Column data `revenue` or `income_per_capita` display are handled via context, thus providing common ground from the UI components that sets interaction and style to the viewState.
+- There are tests for `/CartoMap.test.tsx`, `UI/MapSelector.test.tsx`,`UI/Fill.test.tsx` as examples on unit testing
 - There is a combination of library components from Carto mixed with material. I followed the carto storybook as an example.
-- Columns display are handled via context, thus providing common ground from the UI components that sets interaction and style to the viewState.
+- Used material UI system props on components when allowed. Just for simplicity I.E. Boxes
+- Used styled material when library components where styled needed to be adapted. i.e. https://github.com/screeeen/infomap/blob/master/src/UI/Editor.styles.tsx
 
 # What can be improved:
 
 - UI should keep its state for each layer (table,tileset), thats not finished.
-- Domains for columns can be configurable and dynamic based on min and max
-- Widget would need a redux store? Somehow got confused with versions, tried to pass `widgetSource` from dataSource but didn't work. Tried to extranct the info and run `getFormula` but couldn't manage to run it. I would need more time and maybe some tips ;-) to get them running!
-- Overall architecture is a little mess, and types too... that can be more straight and simplified. Also UI is super sketchy, (too many casts!) It can be improved by keeping the state of each color in a sublevel and not in the main context. I believe it would improve performance too.
-- https://github.com/screeeen/infomap/blob/master/src/utils/utils.ts#L54 I didn't see it coming... sorry!
+- Some types can be refactored and grouped for clarity and security
+- Domain ranges for column display can be configurable and dynamic based on min and max
+- Widget not implemented. I have a doubt and time ran fast!
+- I have a doubt Widget would need a redux store? Somehow got confused with versions, tried to pass `widgetSource` from dataSource but didn't work. Tried to extract the info and run `getFormula` but couldn't manage to get it ran. I would need more time and maybe some tips ;-) to get them running!
+- I finde the architecture in this homework a little mess, and types too... that can be more straight and simplified. Also UI is super sketchy, (too many casts!) It can be improved by keeping the state of each color in a sublevel and not in the main context. I believe it would improve performance too.
 - Storybook and carto UI latest didn't match some components are not exported! I used `3.1.0-alpha.16` seems latest.
-- Tried to run typescript base-3 template but had a little confusion with the dependecies and node too. Had to ditch the idea
-- Overall I would like to optimize it and understand better the application
+- Tried to run typescript base-3 template but had a little confusion with the dependecies and node too. Had to ditch the idea!
 
 # AI chats
 
